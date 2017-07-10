@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
@@ -18,6 +19,99 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    lintOptions{
+        abortOnError false
+    }
+}
+def siteUrl = 'https://github.com/DingMouRen/VideoWallpaper'                        // #CONFIG# // project homepage
+def gitUrl = 'https://github.com/DingMouRen/VideoWallpaper.git'                     // #CONFIG# // project git
+group = "com.dingmouren.videowallpaper"
+version = "1.0.1"
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                name 'VideoWallpaper For Android'                                   // #CONFIG# // project title
+                url siteUrl
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'dingmouren'                                           // #CONFIG# // your user id (you can write your nickname)
+                        name 'dingmouren'                                       // #CONFIG# // your user name
+                        email 'naildingmouren@gmail.com'                               // #CONFIG# // your email
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    options.encoding = "UTF-8"
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+javadoc {
+    options {
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "http://docs.oracle.com/javase/7/docs/api"
+        title 'A VideoWallpaper For Android'   // 文档标题
+    }
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+// 生成jar包
+task releaseJar(type: Copy) {
+    from( 'build/intermediates/bundles/release')
+    into( '../jar')
+    include('classes.jar')
+    rename('classes.jar', 'okgo-' + version + '.jar')
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = "videowallpaper"                                                 // #CONFIG# project name in jcenter
+        userOrg = "dingmouren"
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
     }
 }
 

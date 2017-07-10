@@ -2,4 +2,25 @@
 ### VideoWallpaper可以将本地mp4文件设置成手机桌面，手机桌面原来可以如此炫酷。Enjoy it O(∩_∩)O
 示例|示例
 ---|---
-lala | lalal
+![image](https://github.com/DingMouRen/VideoWallpaper/raw/master/screenshot/video1.gif) | ![image](https://github.com/DingMouRen/VideoWallpaper/raw/master/screenshot/video2.gif)
+
+### build.gralde中引入
+```
+	compile 'com.dingmouren.videowallpaper:videowallpaper:1.0.1'
+```
+### 一句代码让你的手机更酷更炫
+```
+ mVideoWallpaper.setToWallPaper(this,mFile.getAbsolutePath());
+```
+
+### 公共的方法
+
+方法 | 描述
+---|---
+ public static void setVoiceSilence(Context context) | 设置手机桌面壁纸为静音状态
+  public static void setVoiceNormal(Context context) | 设置手机桌面壁纸为有声状态
+  public  void setToWallPaper(Context context,String videoPath) | 设置手机桌面动态壁纸
+  
+# **注意：**
+* 视频文件必须是mp4格式
+* mp4文件必须是本地文件
