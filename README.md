@@ -8,6 +8,13 @@
 ```
 	compile 'com.dingmouren.videowallpaper:videowallpaper:1.0.1'
 ```
+### 需要添加的权限
+```
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.SET_WALLPAPER"/>
+```
+
 ### 一句代码让你的手机更酷更炫
 ```
  mVideoWallpaper.setToWallPaper(this,mFile.getAbsolutePath());
