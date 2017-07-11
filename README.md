@@ -1,8 +1,7 @@
 # **VideoWallpaper**
 ### VideoWallpaper可以将本地mp4文件设置成手机桌面，手机桌面原来可以如此炫酷。Enjoy it O(∩_∩)O
-示例|示例
----|---
-![image](https://github.com/DingMouRen/VideoWallpaper/raw/master/screenshot/video1.gif) | ![image](https://github.com/DingMouRen/VideoWallpaper/raw/master/screenshot/video2.gif)
+
+![image](https://github.com/DingMouRen/VideoWallpaper/raw/master/screenshot/video1.gif) 　 　　　![image](https://github.com/DingMouRen/VideoWallpaper/raw/master/screenshot/video2.gif)
 
 ### build.gralde中引入
 ```
